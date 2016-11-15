@@ -3,6 +3,7 @@ package t2.mcc.iic3380.puc.edu.mcc_t2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,8 +19,8 @@ import edu.puc.astral.CloudOperation;
 import edu.puc.astral.CloudResultReceiver;
 import edu.puc.astral.Params;
 
-public class FibonaciActivity extends AppCompatActivity {
-    private static final String LOG_TAG = FibonaciActivity.class.getSimpleName();
+public class FibonacciActivity extends AppCompatActivity {
+    private static final String LOG_TAG = FibonacciActivity.class.getSimpleName();
     private EditText nEditText;
     private long startTime;
     private Handler handler = new Handler();
@@ -42,14 +43,19 @@ public class FibonaciActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fibonaci);
+        setContentView(R.layout.activity_fibonacci);
         nEditText = (EditText)findViewById(R.id.n_edit_text);
         handlers = new HashMap<>();
+
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Fibonacci");
+
     }
 
 
     public static Intent getIntent(Context context) {
-        Intent intent = new Intent(context, FibonaciActivity.class);
+        Intent intent = new Intent(context, FibonacciActivity.class);
         return intent;
     }
 
@@ -78,7 +84,7 @@ public class FibonaciActivity extends AppCompatActivity {
                 int execDuration = result.getInt(FibonacciRunnable.RESULT_DURATION);
                 String log = "Total time: " + duration + " - Exec time: " + execDuration;
                 Log.i(LOG_TAG, log);
-                Toast.makeText(FibonaciActivity.this, log, Toast.LENGTH_LONG).show();
+                Toast.makeText(FibonacciActivity.this, log, Toast.LENGTH_LONG).show();
             }
         });
         CloudManager.executeCloudOperation(this, cloudOperation);
