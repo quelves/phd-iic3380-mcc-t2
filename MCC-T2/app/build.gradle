@@ -5,11 +5,12 @@ android {
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "t2.mcc.iic3380.puc.edu.mcc_t2"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -27,6 +28,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:multidex:1.0.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
