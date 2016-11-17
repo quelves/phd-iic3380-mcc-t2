@@ -12,7 +12,7 @@ import edu.puc.astral.CloudManager;
  */
 
 public class MainApplication extends MultiDexApplication {
-    private static final String HOST_IP = "http://35.163.228.128";
+    private static final String HOST_IP = "35.163.228.128";
     private static final String SENDER_ID = "460750150714";
 
     @Override

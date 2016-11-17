@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class FibonacciActivity extends AppCompatActivity {
     private long startTime;
     private Handler handler = new Handler();
     private Map<String, ResultHandler> handlers;
+    private TextView tvTime;
 
     private CloudResultReceiver receiver = new CloudResultReceiver() {
         @Override
@@ -46,6 +48,8 @@ public class FibonacciActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fibonacci);
         nEditText = (EditText)findViewById(R.id.n_edit_text);
         handlers = new HashMap<>();
+
+        tvTime = (TextView)findViewById(R.id.tvTime);
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -69,6 +73,7 @@ public class FibonacciActivity extends AppCompatActivity {
     public void doSomething(View view) {
         Params bundle = new Params();
         int n = Integer.parseInt(nEditText.getText().toString());
+        tvTime.setText("Processing para " + n);
         bundle.putInt(FibonacciRunnable.KEY_N, n);
         startTime = System.currentTimeMillis();
 
@@ -83,6 +88,7 @@ public class FibonacciActivity extends AppCompatActivity {
                 long duration = System.currentTimeMillis() - startTime;
                 int execDuration = result.getInt(FibonacciRunnable.RESULT_DURATION);
                 String log = "Total time: " + duration + " - Exec time: " + execDuration;
+                tvTime.setText(log);
                 Log.i(LOG_TAG, log);
                 Toast.makeText(FibonacciActivity.this, log, Toast.LENGTH_LONG).show();
             }

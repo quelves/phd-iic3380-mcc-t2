@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -49,6 +50,7 @@ public class MainActivity extends Activity {
 
     private int mCounter = 0;
     private volatile int mBarrier = 0;
+    private TextView tvTime;
 
     /*
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -91,15 +93,19 @@ public class MainActivity extends Activity {
 
         final EditText editQueens = (EditText) findViewById(R.id.edit_queens);
 
+        tvTime = (TextView)findViewById(R.id.tvTime);
+
         Button btnSolveLocally = (Button) findViewById(R.id.btn_solve_local);
         btnSolveLocally.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
+                    tvTime.setText("Processing...");
                     int queens = Integer.parseInt(editQueens.getText().toString());
                     computeNQueens(queens, CloudOperation.CONTEXT_LOCAL, CloudOperation.STRATEGY_DEFAULT);
                 } catch (NumberFormatException e) {
                     Toast.makeText(MainActivity.this, "Invalid input", Toast.LENGTH_LONG).show();
+                    tvTime.setText("Invalid input");
                 }
             }
         });
@@ -109,10 +115,12 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 try {
+                    tvTime.setText("Processing...");
                     int queens = Integer.parseInt(editQueens.getText().toString());
                     computeNQueens(queens, CloudOperation.CONTEXT_CLOUD, CloudOperation.STRATEGY_DEFAULT);
                 } catch (NumberFormatException e) {
                     Toast.makeText(MainActivity.this, "Invalid input", Toast.LENGTH_LONG).show();
+                    tvTime.setText("Invalid input");
                 }
             }
         });
@@ -122,10 +130,12 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 try {
+                    tvTime.setText("Processing...");
                     int queens = Integer.parseInt(editQueens.getText().toString());
                     computeNQueens(queens, CloudOperation.CONTEXT_DEFAULT, CloudOperation.STRATEGY_DEFAULT);
                 } catch (NumberFormatException e) {
                     Toast.makeText(MainActivity.this, "Invalid input", Toast.LENGTH_LONG).show();
+                    tvTime.setText("Invalid input");
                 }
             }
         });
@@ -135,10 +145,12 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 try {
+                    tvTime.setText("Processing...");
                     int queens = Integer.parseInt(editQueens.getText().toString());
                     computeNQueens(queens, CloudOperation.CONTEXT_DEFAULT, CloudOperation.STRATEGY_CONCURRENT);
                 } catch (NumberFormatException e) {
                     Toast.makeText(MainActivity.this, "Invalid input", Toast.LENGTH_LONG).show();
+                    tvTime.setText("Invalid input");
                 }
             }
         });
@@ -243,6 +255,7 @@ public class MainActivity extends Activity {
                 String log = "Total time: " + duration + " - Exec time: " + execDuration;
                 Log.i(TAG, log);
                 Toast.makeText(MainActivity.this, log, Toast.LENGTH_LONG).show();
+                tvTime.setText(log);
 
             }
         });
