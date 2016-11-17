@@ -10,57 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5c0f9e0-8b6b-46cd-91bd-f5c3fac6f45a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ubuntu@ec2-35-163-228-128.us-west-2.compute.amazonaws.com" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/ancome.aar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/ancome/ancome.aar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/gradle/wrapper/gradle-wrapper.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/.idea/gradle.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/.idea/runConfigurations.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/ancome/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/google-services.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/proguard-rules.pro" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/androidTest/java/t2/mcc/iic3380/puc/edu/nqueens/ExampleInstrumentedTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/ImageRunnable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/MainActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/MainApplication.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/NQueens.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/NQueensRunnable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/OffloadingCodeRunnable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/res/layout/activity_main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/res/values-w820dp/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/res/values/colors.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/res/values/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/res/values/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/main/res/values/styles.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/app/src/test/java/t2/mcc/iic3380/puc/edu/nqueens/ExampleUnitTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/gradle.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/gradlew" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/gradlew.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/local.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../nqueens/settings.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gitignore" afterPath="$PROJECT_DIR$/../.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../nqueens/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../nqueens/.idea/workspace.xml" />
     </list>
     <ignored path="MCC-T2.iws" />
     <ignored path=".idea/workspace.xml" />
