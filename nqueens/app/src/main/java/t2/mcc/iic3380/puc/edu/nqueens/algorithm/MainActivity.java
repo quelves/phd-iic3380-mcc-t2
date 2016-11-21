@@ -190,28 +190,6 @@ public class MainActivity extends Activity {
     }
 
 
-    public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        switch (view.getId()) {
-            case R.id.rbARM:
-                if (checked) {
-                    MainApplication.setHostIP("http://35.163.228.128");
-                    MainApplication.setSenderId("413368182491");
-                    break;
-                }
-            case R.id.rbx86:
-                if (checked) {
-                    MainApplication.setHostIP("http://35.163.222.118");
-                    MainApplication.setSenderId("460750150714");
-                    break;
-                }
-        }
-
-    }
-
 
     private void writeTestFile() {
         File testFile = new File(getFilesDir(), "archivo.txt");
