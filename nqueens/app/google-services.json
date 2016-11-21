@@ -1,58 +1,27 @@
 {
   "project_info": {
-    "project_number": "460750150714",
-    "firebase_url": "https://mobilecoffloading-bd90b.firebaseio.com",
-    "project_id": "mobilecoffloading-bd90b",
-    "storage_bucket": "mobilecoffloading-bd90b.appspot.com"
+    "project_number": "948048471281",
+    "firebase_url": "https://iic3380-mcc-t2-2.firebaseio.com",
+    "project_id": "iic3380-mcc-t2-2",
+    "storage_bucket": "iic3380-mcc-t2-2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:460750150714:android:22efab8e9caf73f7",
+        "mobilesdk_app_id": "1:948048471281:android:8486f8d8547db2bb",
         "android_client_info": {
-          "package_name": "t2.mcc.iic3380.puc.edu.mcc_t2"
+          "package_name": "t2.mcc.iic3380.puc.edu.nqueensx86"
         }
       },
       "oauth_client": [
         {
-          "client_id": "460750150714-k31rfeorupc4j21v5g7pcce061r9sa4l.apps.googleusercontent.com",
+          "client_id": "948048471281-rpn5hvq7kopr4uas8ntk58nvkm1ib972.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCd2o1TlGKpCE5aRclqtfmIgf0gWLpJrpI"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:460750150714:android:c61bb1c95205fc34",
-        "android_client_info": {
-          "package_name": "t2.mcc.iic3380.puc.edu.nqueens"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "460750150714-k31rfeorupc4j21v5g7pcce061r9sa4l.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCd2o1TlGKpCE5aRclqtfmIgf0gWLpJrpI"
+          "current_key": "AIzaSyBFaMH5OjxFnapmoAHhXDEcSJYu_YsILQM"
         }
       ],
       "services": {

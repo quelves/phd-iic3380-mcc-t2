@@ -4,7 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
     defaultConfig {
-        applicationId "t2.mcc.iic3380.puc.edu.nqueens"
+        applicationId "t2.mcc.iic3380.puc.edu.nqueensx86"
         minSdkVersion 17
         targetSdkVersion 24
         versionCode 1
@@ -18,7 +18,7 @@ android {
         }
         applicationVariants.all { variant ->
             variant.outputs.each { output ->
-                output.outputFile = file("$project.buildDir/apk/nqueens.apk")
+                output.outputFile = file("$project.buildDir/apk/nqueensx86.apk")
             }
         }
     }

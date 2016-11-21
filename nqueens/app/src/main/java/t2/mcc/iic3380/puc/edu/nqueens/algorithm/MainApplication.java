@@ -9,7 +9,7 @@ import edu.puc.astral.CloudManager;
  */
 public class MainApplication extends Application {
     private static String HOST_IP = "http://35.163.222.118";
-    private static String SENDER_ID = "460750150714";
+    private static String SENDER_ID = "948048471281";
 
     @Override
     public void onCreate() {
