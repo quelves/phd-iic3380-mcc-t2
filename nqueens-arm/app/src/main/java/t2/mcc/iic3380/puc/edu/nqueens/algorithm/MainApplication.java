@@ -8,8 +8,8 @@ import edu.puc.astral.CloudManager;
  * Created by jose on 11/17/15.
  */
 public class MainApplication extends Application {
-    private static String HOST_IP = "http://35.163.222.118";
-    private static String SENDER_ID = "460750150714";
+    private static String HOST_IP = "http://35.163.228.128";
+    private static String SENDER_ID = "413368182491";
 
     @Override
     public void onCreate() {

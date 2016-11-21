@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="NQueens x86 Algorithm:\nselect complexity"
+        android:text="NQueens ARM Algorithm:\nselect complexity"
         android:id="@+id/textView" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:text="14"
+        android:text="7"
         android:ems="10"
         android:id="@+id/edit_queens" />
 

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "413368182491",
+    "firebase_url": "https://icc3380-mcc-t2.firebaseio.com",
+    "project_id": "icc3380-mcc-t2",
+    "storage_bucket": "icc3380-mcc-t2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413368182491:android:1dffe8a2a77865d0",
+        "android_client_info": {
+          "package_name": "t2.mcc.iic3380.puc.edu.nqueensarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413368182491-7bdg41t01o25g3rdo8vltr20g7q7630i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCS4Tb8iFPzpDnunrdqsJLozgTifN9dh9Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
