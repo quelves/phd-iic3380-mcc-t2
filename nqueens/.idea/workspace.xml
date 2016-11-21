@@ -10,11 +10,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e5798a6-377e-4444-8d4a-8bffce06f7fe" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/gradle/wrapper/gradle-wrapper.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/.idea/compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/.idea/copyright/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/.idea/gradle.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/.idea/runConfigurations.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/build.gradle" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/proguard-rules.pro" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/androidTest/java/t2/mcc/iic3380/puc/edu/vt_arm/ExampleInstrumentedTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/java/t2/mcc/iic3380/puc/edu/vt_arm/MainActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/res/layout/activity_main.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/res/values-w820dp/dimens.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/res/values/colors.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/res/values/dimens.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/res/values/strings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/main/res/values/styles.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/app/src/test/java/t2/mcc/iic3380/puc/edu/vt_arm/ExampleUnitTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/build.gradle" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/gradle.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/gradle/wrapper/gradle-wrapper.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/gradlew" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/gradlew.bat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/local.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-arm/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../README.md" afterPath="$PROJECT_DIR$/../README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/MainApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/MainApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
     </list>
     <ignored path="nqueens.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,11 +80,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainApplication.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ImageRunnable.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/ImageRunnable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainApplication.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/MainApplication.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
               <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -103,6 +156,11 @@
     </leaf>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="luiz.quelves@gmail.com" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GradleLocalSettings">
@@ -2701,12 +2759,60 @@
               <option name="myItemId" value="nqueens" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="algorithm" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nqueens" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nqueens" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nqueens" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
       <pane id="Scratches" />
     </panes>
   </component>
@@ -2910,6 +3016,14 @@
       <option name="presentableId" value="Default" />
       <updated>1479759643950</updated>
     </task>
+    <task id="LOCAL-00001" summary="Add soport for more than 65536 methods">
+      <created>1479762107923</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1479762107923</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2925,7 +3039,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2933,7 +3047,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2951,6 +3065,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add soport for more than 65536 methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add soport for more than 65536 methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2996,6 +3114,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/nqueens/algorithm/ImageRunnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding />
         </state>
       </provider>
