@@ -1,13 +1,14 @@
 package t2.mcc.iic3380.puc.edu.nqueens.algorithm;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import edu.puc.astral.CloudManager;
 
 /**
  * Created by jose on 11/17/15.
  */
-public class MainApplication extends Application {
+public class MainApplication extends MultiDexApplication {
     private static String HOST_IP = "http://35.163.222.118";
     private static String SENDER_ID = "948048471281";
 
