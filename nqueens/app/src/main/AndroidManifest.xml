@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="edu.puc.astral.CloudService" android:exported="true"/>
+        <service android:name="edu.puc.astral.CloudService" android:exported="false"/>
 
         <service android:name="edu.puc.astral.fcm.FcmService"
             android:enabled="true"
