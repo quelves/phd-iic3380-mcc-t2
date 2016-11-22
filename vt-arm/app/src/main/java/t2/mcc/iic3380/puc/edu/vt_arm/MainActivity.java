@@ -2,6 +2,7 @@ package t2.mcc.iic3380.puc.edu.vt_arm;
 
 import android.Manifest.permission;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.ypresto.androidtranscoder.MediaTranscoder;
@@ -37,21 +39,32 @@ public class MainActivity extends Activity {
     private FileDescriptor mVideoFile;
     private ImageView mVideoFrameHolder;
 
+    private ProgressDialog mProgressDialog;
+
+    private TextView tvTime;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mVideoFrameHolder = (ImageView) findViewById(R.id.img_video_frame);
+
+        tvTime = (TextView) findViewById(R.id.tvTime);
+
         findViewById(R.id.btn_select_video).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectVideo();
+
             }
         });
         findViewById(R.id.btn_transcode).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                tvTime.setText("Start transcode...");
                 transcode();
+                tvTime.setText("Finish transcode...");
             }
         });
     }
@@ -100,11 +113,13 @@ public class MainActivity extends Activity {
                     @Override
                     public void onTranscodeProgress(double progress) {
                         Log.i(TAG, "Progress: " + progress);
+                        tvTime.setText("Progress: " + progress);
                     }
 
                     @Override
                     public void onTranscodeCompleted() {
                         Log.d(TAG, "transcoding took " + (SystemClock.uptimeMillis() - startTime) + "ms");
+                        tvTime.setText("transcoding took " + (SystemClock.uptimeMillis() - startTime) + "ms");
                         onTranscodeFinished(true);
                     }
 
@@ -135,8 +150,15 @@ public class MainActivity extends Activity {
                     };
                     thread.start();
 
+                    mProgressDialog = ProgressDialog.show(this, "Please wait", "Transcoding in progress...", true);
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
+
+                    if (mProgressDialog != null) {
+                        mProgressDialog.dismiss();
+                    }
 
                 }
             } else {
@@ -154,6 +176,7 @@ public class MainActivity extends Activity {
                     final ParcelFileDescriptor parcelFileDescriptor;
                     try {
                         parcelFileDescriptor = resolver.openFileDescriptor(data.getData(), "r");
+
                     } catch (FileNotFoundException e) {
                         Log.w("Could not open '" + data.getDataString() + "'", e);
                         Toast.makeText(MainActivity.this, "File not found.", Toast.LENGTH_LONG).show();
@@ -167,6 +190,8 @@ public class MainActivity extends Activity {
                     Bitmap firstFrame = retriever.getFrameAtTime(3000000, MediaMetadataRetriever.OPTION_CLOSEST);
                     retriever.release();
                     mVideoFrameHolder.setImageBitmap(firstFrame);
+
+                    tvTime.setText("File: " + data.getData().getPath());
                 }
                 break;
             }
@@ -188,10 +213,16 @@ public class MainActivity extends Activity {
     }
 
     private void onTranscodeFinished(boolean success) {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+
         if (success) {
             Toast.makeText(MainActivity.this, "Successfully transcoded video file.", Toast.LENGTH_LONG).show();
+            tvTime.setText("Successfully transcoded video file.");
         } else {
             Toast.makeText(MainActivity.this, "Failed to transcode video file.", Toast.LENGTH_LONG).show();
+            tvTime.setText("Failed to transcode video file.");
         }
     }
 
@@ -209,7 +240,7 @@ public class MainActivity extends Activity {
             do {
                 newTitle = title + " (" + counter + ")" + extension;
                 counter++;
-            } while (!isNameContained(newTitle, files));
+            } while (isNameContained(newTitle, files));
 
             return newTitle;
         }
