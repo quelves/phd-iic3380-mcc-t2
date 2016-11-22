@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Movie;
 import android.media.MediaMetadataRetriever;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -24,18 +26,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.storage.FileDownloadTask;
+
 import net.ypresto.androidtranscoder.MediaTranscoder;
 import net.ypresto.androidtranscoder.format.MediaFormatStrategyPresets;
 
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 import edu.puc.astral.CloudManager;
 import edu.puc.astral.CloudOperation;
+import edu.puc.astral.CloudResultReceiver;
 import edu.puc.astral.Params;
+
+import static android.R.id.input;
 
 public class MainActivity extends Activity {
     private static final String TAG = "TranscoderActivity";
@@ -44,7 +55,7 @@ public class MainActivity extends Activity {
 
     private static final int REQUEST_CODE_SELECT_VIDEO = 3;
 
-    private FileDescriptor mVideoFile;
+    private FileDescriptor mVideoFileDescriptor;
     private ImageView mVideoFrameHolder;
 
     private ProgressDialog mProgressDialog;
@@ -54,7 +65,7 @@ public class MainActivity extends Activity {
     private long mStartTime;
 
     private Handler mHandler = new Handler();
-    private File mImageFile;
+    private File mVideoFileIn;
 
     private Map<String, ResultHandler> mResultHandlers;
 
@@ -64,6 +75,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mResultHandlers = new HashMap<>();
+
         mVideoFrameHolder = (ImageView) findViewById(R.id.img_video_frame);
         tvResult = (TextView)findViewById(R.id.tvResult);
 
@@ -76,16 +90,88 @@ public class MainActivity extends Activity {
         findViewById(R.id.btn_transcode_local).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                transcode();
+                transcode(CloudOperation.CONTEXT_LOCAL);
             }
         });
         findViewById(R.id.btn_transcode_cloud).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                transcode();
+                transcode(CloudOperation.CONTEXT_CLOUD);
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        CloudManager.registerReceiver(this, mReceiver);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        CloudManager.unregisterReceiver(this, mReceiver);
+    }
+
+    private void transcode(@CloudOperation.ExecutionContext int executionContext) {
+        if (ContextCompat.checkSelfPermission(
+                this, permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_WRITE_PERMISSION);
+        }
+        else {
+            if (mVideoFileIn != null) {
+                try {
+                    Params params = new Params();
+                    params.putFile(VideoTranscodingRunnable.KEY_VIDEO, mVideoFileIn);
+
+                    CloudOperation operation = new CloudOperation(this, VideoTranscodingRunnable.class);
+                    operation.setParams(params);
+                    operation.setExecutionContext(executionContext);
+                    mResultHandlers.put(operation.getOperationId(), new ResultHandler() {
+                        @Override
+                        public void handleResult(Params result) {
+                            try {
+                                tvResult.setText("Callback of transcode!");
+                                File file = VideoTranscodingRunnable.createOutputFile(result.openFile(MainActivity.this, VideoTranscodingRunnable.KEY_VIDEO), getTranscodedVideoOutputFileName());
+                                onTranscodeFinished(Boolean.valueOf(result.getString(VideoTranscodingRunnable.KEY_RESULT)));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    CloudManager.executeCloudOperation(this, operation);
+                    mProgressDialog = ProgressDialog.show(this, "Please wait", "Transcoding in progress...", true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    if (mProgressDialog != null) {
+                        mProgressDialog.dismiss();
+                    }
+                }
+
+            } else {
+                Toast.makeText(this, "Please select an image first.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private CloudResultReceiver mReceiver = new CloudResultReceiver() {
+        @Override
+        public void onReceiveResult(final String operationId, final Params result) {
+            if (mResultHandlers.containsKey(operationId)) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mResultHandlers.get(operationId).handleResult(result);
+                        mResultHandlers.remove(operationId);
+                    }
+                });
+
+            }
+        }
+    };
 
     private void selectVideo() {
         if (ContextCompat.checkSelfPermission(
@@ -113,6 +199,202 @@ public class MainActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CODE_SELECT_VIDEO: {
+                if (resultCode == RESULT_OK) {
+                    mVideoFileIn = uriToFile(data.getData());
+                    Log.d(TAG, "File: " + mVideoFileIn.getPath());
+
+
+                    //Get first image and set video attribute
+
+                    ContentResolver resolver = getContentResolver();
+                    final ParcelFileDescriptor parcelFileDescriptor;
+                    try {
+                        parcelFileDescriptor = resolver.openFileDescriptor(Uri.fromFile(mVideoFileIn), "r");
+
+                    } catch (FileNotFoundException e) {
+                        Log.w("Could not open '" + data.getDataString() + "'", e);
+                        Toast.makeText(MainActivity.this, "File not found.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    mVideoFileDescriptor = parcelFileDescriptor.getFileDescriptor();
+
+
+                    MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+                    retriever.setDataSource(mVideoFileDescriptor);
+
+                    Bitmap firstFrame = retriever.getFrameAtTime(3000000, MediaMetadataRetriever.OPTION_CLOSEST);
+                    retriever.release();
+                    mVideoFrameHolder.setImageBitmap(firstFrame);
+                }
+                break;
+            }
+            case REQUEST_CODE_READ_PERMISSION: {
+                if (resultCode == RESULT_OK) {
+                    selectVideo();
+                }
+                break;
+            }
+            case REQUEST_CODE_WRITE_PERMISSION: {
+                if (resultCode == RESULT_OK) {
+                    transcode();
+                }
+                break;
+            }
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+
+    private void createOutputFile(InputStream in) {
+        final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), getTranscodedVideoOutputFileName());
+        File moviesDirectory = file.getParentFile();
+        if (!moviesDirectory.exists()) {
+            moviesDirectory.mkdir();
+        }
+        try {
+            OutputStream output = new FileOutputStream(file);
+            try {
+                try {
+                    byte[] buffer = new byte[4 * 1024]; // or other buffer size
+                    int read;
+
+                    while ((read = in.read(buffer)) != -1) {
+                        output.write(buffer, 0, read);
+                    }
+                    output.flush();
+                } finally {
+                    output.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace(); // handle exception, define IOException and others
+            }
+        }
+        catch (Exception e) {
+
+        } finally {
+        }
+
+
+    }
+
+    private File uriToFile(Uri uri) {
+        final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), getPreTranscodedVideoOutputFileName());
+        File moviesDirectory = file.getParentFile();
+        if (!moviesDirectory.exists()) {
+            moviesDirectory.mkdir();
+        }
+        try {
+            InputStream in = getContentResolver().openInputStream(uri);
+            OutputStream output = new FileOutputStream(file);
+            try {
+                try {
+                    byte[] buffer = new byte[4 * 1024]; // or other buffer size
+                    int read;
+
+                    while ((read = in.read(buffer)) != -1) {
+                        output.write(buffer, 0, read);
+                    }
+                    output.flush();
+                } finally {
+                    output.close();
+                }
+            } catch (Exception e1) {
+                e1.printStackTrace(); // handle exception, define IOException and others
+            }
+
+        } catch (Exception e2) {
+
+            e2.printStackTrace();
+        }
+        return file;
+    }
+
+
+
+
+
+
+
+    private interface ResultHandler {
+        void handleResult(Params result);
+    }
+
+
+
+
+    private void onTranscodeFinished(boolean success) {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+
+        if (success) {
+            Toast.makeText(MainActivity.this, "Successfully transcoded video file.", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(MainActivity.this, "Failed to transcode video file.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private String getTranscodedVideoOutputFileName() {
+        String title = "transcoded_file";
+        String extension = ".mp4";
+        int counter = 1;
+
+        File moviesDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+        File[] files = moviesDirectory.listFiles();
+        if (files == null || !isNameContained(title + extension, files)) {
+            return title + extension;
+        } else {
+            String newTitle;
+            do {
+                newTitle = title + " (" + counter + ")" + extension;
+                counter++;
+            } while (isNameContained(newTitle, files));
+
+            return newTitle;
+        }
+    }
+
+    private String getPreTranscodedVideoOutputFileName() {
+        String title = "pre_transcoded_file";
+        String extension = ".mp4";
+        int counter = 1;
+
+        File moviesDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+        File[] files = moviesDirectory.listFiles();
+        if (files == null || !isNameContained(title + extension, files)) {
+            return title + extension;
+        } else {
+            String newTitle;
+            do {
+                newTitle = title + " (" + counter + ")" + extension;
+                counter++;
+            } while (isNameContained(newTitle, files));
+
+            return newTitle;
+        }
+    }
+
+    private boolean isNameContained(String name, File[] files) {
+        for (File file : files) {
+            if (file.getName().equals(name)) return true;
+        }
+        return false;
+    }
+
+
+    //remove
+    private void storeVideoTranscoded(File localFile)  {
+        Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri contentUri = Uri.fromFile(localFile);
+        scanIntent.setData(contentUri);
+        sendBroadcast(scanIntent);
+    }
+
     /**
      * Transcodes a video into a .mp4 video file with 720p resolution.
      *
@@ -125,7 +407,7 @@ public class MainActivity extends Activity {
                     new String[]{permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_CODE_WRITE_PERMISSION);
         } else {
-            if (mVideoFile != null) {
+            if (mVideoFileDescriptor != null) {
                 final long startTime = SystemClock.uptimeMillis();
                 final MediaTranscoder.Listener listener = new MediaTranscoder.Listener() {
                     @Override
@@ -163,7 +445,7 @@ public class MainActivity extends Activity {
                     Thread thread = new Thread() {
                         @Override
                         public void run() {
-                            MediaTranscoder.getInstance().transcodeVideo(mVideoFile, outputFile.getAbsolutePath(),
+                            MediaTranscoder.getInstance().transcodeVideo(mVideoFileDescriptor, outputFile.getAbsolutePath(),
                                     MediaFormatStrategyPresets.createAndroid720pStrategy(), listener);
                         }
                     };
@@ -181,122 +463,5 @@ public class MainActivity extends Activity {
                 Toast.makeText(this, "No video file selected.", Toast.LENGTH_LONG).show();
             }
         }
-    }
-
-    private interface ResultHandler {
-        void handleResult(Params result);
-    }
-
-    private void computeImage(@CloudOperation.ExecutionContext int executionContext) {
-        if (mImageFile != null) {
-            try {
-                Params params = new Params();
-                params.putFile(VideoTranscodingRunnable.KEY_IMAGE, mImageFile);
-
-                CloudOperation operation = new CloudOperation(this, VideoTranscodingRunnable.class);
-                operation.setParams(params);
-                operation.setExecutionContext(executionContext);
-                mResultHandlers.put(operation.getOperationId(), new ResultHandler() {
-                    @Override
-                    public void handleResult(Params result) {
-                        try {
-
-                            //recibir video transcoded
-                            //Bitmap bitmap = BitmapFactory.decodeStream(result.openFile(MainActivity.this, VideoTranscodingRunnable.KEY_IMAGE));
-                            //mImageView.setImageBitmap(bitmap);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                CloudManager.executeCloudOperation(this, operation);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        } else {
-            Toast.makeText(this, "Please select an image first.", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_CODE_SELECT_VIDEO: {
-                if (resultCode == RESULT_OK) {
-                    ContentResolver resolver = getContentResolver();
-                    final ParcelFileDescriptor parcelFileDescriptor;
-                    try {
-                        parcelFileDescriptor = resolver.openFileDescriptor(data.getData(), "r");
-                    } catch (FileNotFoundException e) {
-                        Log.w("Could not open '" + data.getDataString() + "'", e);
-                        Toast.makeText(MainActivity.this, "File not found.", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    mVideoFile = parcelFileDescriptor.getFileDescriptor();
-
-                    MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-                    retriever.setDataSource(mVideoFile);
-
-                    Bitmap firstFrame = retriever.getFrameAtTime(3000000, MediaMetadataRetriever.OPTION_CLOSEST);
-                    retriever.release();
-                    mVideoFrameHolder.setImageBitmap(firstFrame);
-                }
-                break;
-            }
-            case REQUEST_CODE_READ_PERMISSION: {
-                if (resultCode == RESULT_OK) {
-                    selectVideo();
-                }
-                break;
-            }
-            case REQUEST_CODE_WRITE_PERMISSION: {
-                if (resultCode == RESULT_OK) {
-                    transcode();
-                }
-                break;
-            }
-            default:
-                super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    private void onTranscodeFinished(boolean success) {
-        if (mProgressDialog != null) {
-            mProgressDialog.dismiss();
-        }
-
-        if (success) {
-            Toast.makeText(MainActivity.this, "Successfully transcoded video file.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(MainActivity.this, "Failed to transcode video file.", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private String getTranscodedVideoOutputFileName() {
-        String title = "transcoded_file";
-        String extension = ".mp4";
-        int counter = 1;
-
-        File moviesDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
-        File[] files = moviesDirectory.listFiles();
-        if (files == null || !isNameContained(title + extension, files)) {
-            return title + extension;
-        } else {
-            String newTitle;
-            do {
-                newTitle = title + " (" + counter + ")" + extension;
-                counter++;
-            } while (isNameContained(newTitle, files));
-
-            return newTitle;
-        }
-    }
-
-    private boolean isNameContained(String name, File[] files) {
-        for (File file : files) {
-            if (file.getName().equals(name)) return true;
-        }
-        return false;
     }
 }
