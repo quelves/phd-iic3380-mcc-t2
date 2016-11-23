@@ -10,9 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e361eff-7fdc-4a63-87d4-a6bdc55fde01" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../nqueens/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../nqueens/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java" afterPath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java" />
     </list>
     <ignored path="vt-x86.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -128,8 +126,8 @@
       <file leaf-file-name="VideoTranscodingRunnable.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="164" column="45" selection-start-line="164" selection-start-column="45" selection-end-line="164" selection-end-column="45" />
+            <state relative-caret-position="349">
+              <caret line="160" column="72" selection-start-line="160" selection-start-column="28" selection-end-line="160" selection-end-column="72" />
               <folding>
                 <element signature="e#4329#4330#0" expanded="true" />
                 <element signature="e#4395#4396#0" expanded="true" />
@@ -175,8 +173,8 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="luiz.quelves@gmail.comç" />
         <option value="luiz.quelves@gmail.com" />
+        <option value="luiz.quelves@gmail.comç" />
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -3222,7 +3220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479861596910</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Changes for ejecute on cloud">
+      <created>1479861759451</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1479861759451</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3622,8 +3627,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="164" column="45" selection-start-line="164" selection-start-column="45" selection-end-line="164" selection-end-column="45" />
+        <state relative-caret-position="349">
+          <caret line="160" column="72" selection-start-line="160" selection-start-column="28" selection-end-line="160" selection-end-column="72" />
           <folding>
             <element signature="e#4329#4330#0" expanded="true" />
             <element signature="e#4395#4396#0" expanded="true" />
