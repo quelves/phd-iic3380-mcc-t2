@@ -33,7 +33,7 @@ public class MyApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
-        CloudManager.initialize(this, SENDER_ID, HOST_IP);
+       CloudManager.initialize(this, SENDER_ID, HOST_IP);
     }
 
     public static void setHostIP(String host) {
