@@ -10,15 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e361eff-7fdc-4a63-87d4-a6bdc55fde01" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/algorithm/Main.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/algorithm/NQueens.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/algorithm/NQueensRunnable.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../nqueens/.idea/misc.xml" afterPath="$PROJECT_DIR$/../nqueens/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../nqueens/.idea/modules.xml" afterPath="$PROJECT_DIR$/../nqueens/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../nqueens/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../nqueens/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainApplication.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java" afterPath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java" />
     </list>
     <ignored path="vt-x86.iws" />
@@ -65,18 +59,18 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
+            <state relative-caret-position="425">
+              <caret line="254" column="92" selection-start-line="254" selection-start-column="92" selection-end-line="254" selection-end-column="92" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2726#2894#0" expanded="true" />
                 <element signature="e#2893#2894#0" expanded="true" />
-                <element signature="e#4324#5058#0" expanded="true" />
-                <element signature="e#5057#5058#0" expanded="true" />
-                <element signature="e#5669#6189#0" expanded="true" />
-                <element signature="e#5890#6156#0" expanded="true" />
-                <element signature="e#6155#6156#0" expanded="true" />
-                <element signature="e#6188#6189#0" expanded="true" />
+                <element signature="e#4324#5118#0" expanded="true" />
+                <element signature="e#5117#5118#0" expanded="true" />
+                <element signature="e#5729#6249#0" expanded="true" />
+                <element signature="e#5950#6216#0" expanded="true" />
+                <element signature="e#6215#6216#0" expanded="true" />
+                <element signature="e#6248#6249#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -135,11 +129,13 @@
       <file leaf-file-name="VideoTranscodingRunnable.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="180" column="25" selection-start-line="180" selection-start-column="25" selection-end-line="180" selection-end-column="25" />
+            <state relative-caret-position="469">
+              <caret line="159" column="29" selection-start-line="159" selection-start-column="29" selection-end-line="159" selection-end-column="29" />
               <folding>
-                <element signature="e#4241#4242#0" expanded="true" />
-                <element signature="e#4307#4308#0" expanded="true" />
+                <element signature="e#4329#4330#0" expanded="true" />
+                <element signature="e#4395#4396#0" expanded="true" />
+                <element signature="e#5078#5583#0" expanded="true" />
+                <element signature="e#5582#5583#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -3212,7 +3208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479831050622</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Local process with ancome">
+      <created>1479857888170</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1479857888170</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3258,20 +3261,21 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes for make vt-x86" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes for make vt-x86" />
+    <MESSAGE value="Local process with ancome" />
+    <option name="LAST_COMMIT_MESSAGE" value="Local process with ancome" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainActivity.java</url>
-          <line>402</line>
+          <line>405</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java</url>
-          <line>114</line>
+          <line>116</line>
           <properties />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
@@ -3283,25 +3287,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java</url>
-          <line>178</line>
+          <line>181</line>
           <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java</url>
-          <line>124</line>
+          <line>126</line>
           <properties />
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java</url>
-          <line>130</line>
+          <line>132</line>
           <properties />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java</url>
-          <line>140</line>
+          <line>142</line>
           <properties />
           <option name="timeStamp" value="25" />
         </line-breakpoint>
@@ -3353,12 +3357,12 @@
             <element signature="imports" expanded="true" />
             <element signature="e#2726#2894#0" expanded="true" />
             <element signature="e#2893#2894#0" expanded="true" />
-            <element signature="e#4324#5058#0" expanded="true" />
-            <element signature="e#5057#5058#0" expanded="true" />
-            <element signature="e#5669#6189#0" expanded="true" />
-            <element signature="e#5890#6156#0" expanded="true" />
-            <element signature="e#6155#6156#0" expanded="true" />
-            <element signature="e#6188#6189#0" expanded="true" />
+            <element signature="e#4324#5118#0" expanded="true" />
+            <element signature="e#5117#5118#0" expanded="true" />
+            <element signature="e#5729#6249#0" expanded="true" />
+            <element signature="e#5950#6216#0" expanded="true" />
+            <element signature="e#6215#6216#0" expanded="true" />
+            <element signature="e#6248#6249#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3406,8 +3410,10 @@
         <state relative-caret-position="480">
           <caret line="45" column="36" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="36" />
           <folding>
-            <element signature="e#4241#4242#0" expanded="true" />
-            <element signature="e#4307#4308#0" expanded="true" />
+            <element signature="e#4329#4330#0" expanded="true" />
+            <element signature="e#4395#4396#0" expanded="true" />
+            <element signature="e#5078#5583#0" expanded="true" />
+            <element signature="e#5582#5583#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3590,29 +3596,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
+        <state relative-caret-position="425">
+          <caret line="254" column="92" selection-start-line="254" selection-start-column="92" selection-end-line="254" selection-end-column="92" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2726#2894#0" expanded="true" />
             <element signature="e#2893#2894#0" expanded="true" />
-            <element signature="e#4324#5058#0" expanded="true" />
-            <element signature="e#5057#5058#0" expanded="true" />
-            <element signature="e#5669#6189#0" expanded="true" />
-            <element signature="e#5890#6156#0" expanded="true" />
-            <element signature="e#6155#6156#0" expanded="true" />
-            <element signature="e#6188#6189#0" expanded="true" />
+            <element signature="e#4324#5118#0" expanded="true" />
+            <element signature="e#5117#5118#0" expanded="true" />
+            <element signature="e#5729#6249#0" expanded="true" />
+            <element signature="e#5950#6216#0" expanded="true" />
+            <element signature="e#6215#6216#0" expanded="true" />
+            <element signature="e#6248#6249#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="180" column="25" selection-start-line="180" selection-start-column="25" selection-end-line="180" selection-end-column="25" />
+        <state relative-caret-position="469">
+          <caret line="159" column="29" selection-start-line="159" selection-start-column="29" selection-end-line="159" selection-end-column="29" />
           <folding>
-            <element signature="e#4241#4242#0" expanded="true" />
-            <element signature="e#4307#4308#0" expanded="true" />
+            <element signature="e#4329#4330#0" expanded="true" />
+            <element signature="e#4395#4396#0" expanded="true" />
+            <element signature="e#5078#5583#0" expanded="true" />
+            <element signature="e#5582#5583#0" expanded="true" />
           </folding>
         </state>
       </provider>

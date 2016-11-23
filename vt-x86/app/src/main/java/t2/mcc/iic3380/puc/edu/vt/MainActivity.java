@@ -139,6 +139,7 @@ public class MainActivity extends Activity {
                                 onTranscodeFinished(Boolean.valueOf(result.getString(VideoTranscodingRunnable.KEY_RESULT)));
                             } catch (Exception e) {
                                 e.printStackTrace();
+                                onTranscodeFinished(false);
                             }
                         }
                     });
@@ -251,7 +252,7 @@ public class MainActivity extends Activity {
 
 
     private void createOutputFile(InputStream in) {
-        final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), getTranscodedVideoOutputFileName());
+        final File file = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
@@ -283,7 +284,7 @@ public class MainActivity extends Activity {
     }
 
     private File uriToFile(Uri uri) {
-        final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), getPreTranscodedVideoOutputFileName());
+        final File file = new File(MainApplication.getMainApplicationContext().getFilesDir(), getPreTranscodedVideoOutputFileName());
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
@@ -334,8 +335,10 @@ public class MainActivity extends Activity {
 
         if (success) {
             Toast.makeText(MainActivity.this, "Successfully transcoded video file.", Toast.LENGTH_LONG).show();
+
         } else {
             Toast.makeText(MainActivity.this, "Failed to transcode video file.", Toast.LENGTH_LONG).show();
+            tvResult.setText("Failed to transcode video file.");
         }
     }
 
@@ -344,7 +347,7 @@ public class MainActivity extends Activity {
         String extension = ".mp4";
         int counter = 1;
 
-        File moviesDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+        File moviesDirectory = MainApplication.getMainApplicationContext().getFilesDir();
         File[] files = moviesDirectory.listFiles();
         if (files == null || !isNameContained(title + extension, files)) {
             return title + extension;
@@ -364,7 +367,7 @@ public class MainActivity extends Activity {
         String extension = ".mp4";
         int counter = 1;
 
-        File moviesDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+        File moviesDirectory = MainApplication.getMainApplicationContext().getFilesDir();
         File[] files = moviesDirectory.listFiles();
         if (files == null || !isNameContained(title + extension, files)) {
             return title + extension;
@@ -435,7 +438,7 @@ public class MainActivity extends Activity {
                     }
                 };
 
-                final File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), getTranscodedVideoOutputFileName());
+                final File outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
                 File moviesDirectory = outputFile.getParentFile();
                 if (!moviesDirectory.exists()) {
                     moviesDirectory.mkdir();
