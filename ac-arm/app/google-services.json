@@ -1,45 +1,166 @@
 {
   "project_info": {
-    "project_id": "chess-6c468",
-    "project_number": "582832963345",
-    "name": "Chess"
+    "project_number": "460750150714",
+    "firebase_url": "https://mobilecoffloading-bd90b.firebaseio.com",
+    "project_id": "mobilecoffloading-bd90b",
+    "storage_bucket": "mobilecoffloading-bd90b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:582832963345:android:bf48f8aa791769ea",
-        "client_id": "android:jwtc.android.chess",
-        "client_type": 1,
+        "mobilesdk_app_id": "1:460750150714:android:22efab8e9caf73f7",
         "android_client_info": {
-          "package_name": "jwtc.android.chess"
+          "package_name": "t2.mcc.iic3380.puc.edu.mcc_t2"
         }
       },
-      "oauth_client": [],
-      "api_key": [],
+      "oauth_client": [
+        {
+          "client_id": "460750150714-k31rfeorupc4j21v5g7pcce061r9sa4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd2o1TlGKpCE5aRclqtfmIgf0gWLpJrpI"
+        }
+      ],
       "services": {
         "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-4706047-13"
-          }
-        },
-        "cloud_messaging_service": {
-          "status": 1,
-          "apns_config": []
+          "status": 1
         },
         "appinvite_service": {
           "status": 1,
           "other_platform_oauth_client": []
         },
-        "google_signin_service": {
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460750150714:android:c61bb1c95205fc34",
+        "android_client_info": {
+          "package_name": "t2.mcc.iic3380.puc.edu.nqueens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460750150714-k31rfeorupc4j21v5g7pcce061r9sa4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd2o1TlGKpCE5aRclqtfmIgf0gWLpJrpI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
           "status": 1
         },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
         "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460750150714:android:34e02ea58c93e209",
+        "android_client_info": {
+          "package_name": "com.example.pablo.testancome"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460750150714-k31rfeorupc4j21v5g7pcce061r9sa4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd2o1TlGKpCE5aRclqtfmIgf0gWLpJrpI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
           "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460750150714:android:3941eed9a207c554",
+        "android_client_info": {
+          "package_name": "t2.mcc.iic3380.puc.edu.vt_arm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460750150714-k31rfeorupc4j21v5g7pcce061r9sa4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd2o1TlGKpCE5aRclqtfmIgf0gWLpJrpI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460750150714:android:f51c0a85ddf50bbd",
+        "android_client_info": {
+          "package_name": "jwtc.android.chess_arm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460750150714-k31rfeorupc4j21v5g7pcce061r9sa4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd2o1TlGKpCE5aRclqtfmIgf0gWLpJrpI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
         }
       }
     }
   ],
-  "client_info": [],
-  "ARTIFACT_VERSION": "1"
+  "configuration_version": "1"
 }

@@ -24,6 +24,23 @@
   				<action android:name="android.intent.action.VIEW" /> 
   			</intent-filter>
   		</activity>
+
+		<service android:name="edu.puc.astral.CloudService" android:exported="false"/>
+
+		<service android:name="edu.puc.astral.fcm.FcmService"
+			android:enabled="true"
+			android:exported="true">
+			<intent-filter>
+				<action android:name="com.google.firebase.MESSAGING_EVENT"/>
+			</intent-filter>
+		</service>
+
+		<service android:name="edu.puc.astral.fcm.FcmIdListenerService"
+			android:exported="false">
+			<intent-filter>
+				<action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+			</intent-filter>
+		</service>
   		<activity
 	        android:name=".ChessPreferences"
 	        android:label="@string/globalpreferences">
