@@ -35,6 +35,7 @@ public class SearchAlgorithmRunner implements Runnable{
 				else {
 					s = "Searched at " + level + " ply";
 				}
+				System.out.println("s1 = " + s);
 				m_control.sendMessageFromThread(s);
 				
 			} else {
@@ -74,7 +75,7 @@ public class SearchAlgorithmRunner implements Runnable{
 					}
 					
 					s = s + "\n\t" + String.format("%.2f", fValue) /*+ "\t@ " + ply*/;
-					
+					System.out.println("s2 = " + s);
 					m_control.sendMessageFromThread(s);
 				}
 				
@@ -88,11 +89,13 @@ public class SearchAlgorithmRunner implements Runnable{
 				
 				if(evalCnt == 0){
 					s = "From opening book";
+					System.out.println("s3 = " + s);
 				} else {
 					//s = "";
 					int iTime = (int)((System.currentTimeMillis()-lMillies)/1000); 
 					iNps = (int)(evalCnt / iTime);
 					s = iNps + " N/s (" + iTime + " s)" + "\n\t" + String.format("%.2f", fValue);
+					System.out.println("s4 = " + s);
 				}
 				m_control.sendMessageFromThread(s);
 				

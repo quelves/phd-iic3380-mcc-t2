@@ -40,7 +40,6 @@ android {
 }
 
 dependencies {
-    compile project(':ancome')
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:mediarouter-v7:24.0.0'
@@ -62,6 +61,7 @@ dependencies {
     compile 'io.tus.java.client:tus-java-client:0.3.1'
     compile 'io.tus.android.client:tus-android-client:0.1.4'
     compile 'com.google.protobuf:protobuf-lite:3.0.0'
+    compile project(':ancome')
 }
 
 apply plugin: 'com.google.gms.google-services'
