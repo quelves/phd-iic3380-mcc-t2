@@ -12,7 +12,6 @@
     <list default="true" id="4e361eff-7fdc-4a63-87d4-a6bdc55fde01" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../nqueens/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../nqueens/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java" afterPath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java" />
     </list>
     <ignored path="vt-x86.iws" />
@@ -129,13 +128,13 @@
       <file leaf-file-name="VideoTranscodingRunnable.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="159" column="29" selection-start-line="159" selection-start-column="29" selection-end-line="159" selection-end-column="29" />
+            <state relative-caret-position="544">
+              <caret line="164" column="45" selection-start-line="164" selection-start-column="45" selection-end-line="164" selection-end-column="45" />
               <folding>
                 <element signature="e#4329#4330#0" expanded="true" />
                 <element signature="e#4395#4396#0" expanded="true" />
-                <element signature="e#5078#5583#0" expanded="true" />
-                <element signature="e#5582#5583#0" expanded="true" />
+                <element signature="e#5078#5629#0" expanded="true" />
+                <element signature="e#5628#5629#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -176,6 +175,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="luiz.quelves@gmail.comç" />
         <option value="luiz.quelves@gmail.com" />
       </list>
     </option>
@@ -3215,7 +3215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479857888170</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Changes for ejecute on cloud">
+      <created>1479861596910</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1479861596910</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3262,7 +3269,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes for make vt-x86" />
     <MESSAGE value="Local process with ancome" />
-    <option name="LAST_COMMIT_MESSAGE" value="Local process with ancome" />
+    <MESSAGE value="Changes for ejecute on cloud" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes for ejecute on cloud" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3287,7 +3295,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java</url>
-          <line>181</line>
+          <line>182</line>
           <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
@@ -3412,8 +3420,8 @@
           <folding>
             <element signature="e#4329#4330#0" expanded="true" />
             <element signature="e#4395#4396#0" expanded="true" />
-            <element signature="e#5078#5583#0" expanded="true" />
-            <element signature="e#5582#5583#0" expanded="true" />
+            <element signature="e#5078#5629#0" expanded="true" />
+            <element signature="e#5628#5629#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3614,13 +3622,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="159" column="29" selection-start-line="159" selection-start-column="29" selection-end-line="159" selection-end-column="29" />
+        <state relative-caret-position="544">
+          <caret line="164" column="45" selection-start-line="164" selection-start-column="45" selection-end-line="164" selection-end-column="45" />
           <folding>
             <element signature="e#4329#4330#0" expanded="true" />
             <element signature="e#4395#4396#0" expanded="true" />
-            <element signature="e#5078#5583#0" expanded="true" />
-            <element signature="e#5582#5583#0" expanded="true" />
+            <element signature="e#5078#5629#0" expanded="true" />
+            <element signature="e#5628#5629#0" expanded="true" />
           </folding>
         </state>
       </provider>

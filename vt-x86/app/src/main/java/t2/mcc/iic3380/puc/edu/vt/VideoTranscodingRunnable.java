@@ -162,6 +162,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
                                     MediaFormatStrategyPresets.createAndroid720pStrategy(), listener);
                         } catch (Throwable t) {
                             t.printStackTrace();
+                            finalized = true;
                         }
                     }
                 };
