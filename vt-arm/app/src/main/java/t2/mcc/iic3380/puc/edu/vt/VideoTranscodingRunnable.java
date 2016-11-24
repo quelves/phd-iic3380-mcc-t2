@@ -23,6 +23,10 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
+import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
+
 import net.ypresto.androidtranscoder.MediaTranscoder;
 import net.ypresto.androidtranscoder.format.MediaFormatStrategyPresets;
 
@@ -57,6 +61,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
     private static final int REQUEST_CODE_SELECT_VIDEO = 3;
 
     private FileDescriptor mVideoFileDescriptor;
+    private File mVideoFileIn;
     private ImageView mVideoFrameHolder;
 
     private File outputFile;
@@ -71,13 +76,14 @@ public class VideoTranscodingRunnable extends CloudRunnable {
         try {
             InputStream is = params.openFile(getContext(), KEY_VIDEO);
 
-            File file = createOutputFile(is, FILE_NAME);
+            mVideoFileIn = createOutputFile(is, FILE_NAME);
 
-            System.out.println("File name : " + file.getAbsolutePath());
+
+            System.out.println("File name : " + mVideoFileIn.getAbsolutePath());
             ContentResolver resolver = MainApplication.getMainApplicationContentResolver();
             ParcelFileDescriptor parcelFileDescriptor = null;
             try {
-                parcelFileDescriptor = resolver.openFileDescriptor(Uri.fromFile(file), "r");
+                parcelFileDescriptor = resolver.openFileDescriptor(Uri.fromFile(mVideoFileIn), "r");
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -112,68 +118,64 @@ public class VideoTranscodingRunnable extends CloudRunnable {
         return null;
     }
 
+    /**
+     * Transcodes a video into a .mp4 video file with 720p resolution.
+     */
     private void transcode() {
-
-        if (mVideoFileDescriptor != null) {
-            final long startTime = SystemClock.uptimeMillis();
-            final MediaTranscoder.Listener listener = new MediaTranscoder.Listener() {
-                @Override
-                public void onTranscodeProgress(double progress) {
-                    System.out.println(TAG + "Progress: " + progress);
-                }
-
-                @Override
-                public void onTranscodeCompleted() {
-                    System.out.println(TAG + "transcoding took " + (SystemClock.uptimeMillis() - startTime) + "ms");
-                    onTranscodeFinished(true);
-                }
-
-                @Override
-                public void onTranscodeCanceled() {
-                    System.out.println(TAG + "trancoding canceled");
-                    onTranscodeFinished(false);
-                }
-
-                @Override
-                public void onTranscodeFailed(Exception exception) {
-                    onTranscodeFinished(false);
-                }
-            };
-
-            MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-            retriever.setDataSource(mVideoFileDescriptor);
-
-            Bitmap firstFrame = retriever.getFrameAtTime(3000000, MediaMetadataRetriever.OPTION_CLOSEST);
-            retriever.release();
-
-            outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
+        if (mVideoFileIn != null) {
+            final long startTime = SystemClock.elapsedRealtime();
+            final File outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
             File moviesDirectory = outputFile.getParentFile();
             if (!moviesDirectory.exists()) {
                 moviesDirectory.mkdir();
             }
+
+
+            String[] command = {"-y", "-i", "", "-s", "1280x720", ""};
+            command[2] = mVideoFileIn.getAbsolutePath();
+            command[5] = outputFile.getAbsolutePath();
+
+            //Log.i(TAG, "Executing FFmpeg command: " + command);
             try {
-                outputFile.createNewFile();
+                FFmpeg.getInstance(MainApplication.getMainApplicationContext()).execute(command, new FFmpegExecuteResponseHandler() {
 
-                Thread thread = new Thread() {
                     @Override
-                    public void run() {
-                        try {
-                            MediaTranscoder.getInstance().transcodeVideo(mVideoFileDescriptor, outputFile.getAbsolutePath(),
-                                    MediaFormatStrategyPresets.createAndroid720pStrategy(), listener);
-                        } catch (Throwable t) {
-                            t.printStackTrace();
-                            finalized = true;
-                        }
+                    public void onStart() {
+                        log(TAG, "Transcoding started");
+
                     }
-                };
-                thread.start();
 
-            } catch (IOException e) {
+                    @Override
+                    public void onFinish() {
+                        long time = SystemClock.elapsedRealtime() - startTime;
+                        log(TAG, "Transcoding finished. Operation took " + time + " ms.");
+
+                    }
+
+                    @Override
+                    public void onSuccess(String message) {
+                        log(TAG, "Transcoding success: " + message);
+
+                    }
+
+                    @Override
+                    public void onProgress(String message) {
+                        log(TAG, "Transcoding progress: " + message);
+                    }
+
+                    @Override
+                    public void onFailure(String message) {
+                        log(TAG, "Transcoding failure: " + message);
+
+                    }
+                });
+            } catch (FFmpegCommandAlreadyRunningException e) {
                 e.printStackTrace();
-
             }
+
+
         } else {
-            System.out.println(TAG + "No video file selected.");
+            log(TAG, "No video file selected.");
         }
 
     }
@@ -286,6 +288,11 @@ public class VideoTranscodingRunnable extends CloudRunnable {
 
         return result;
 
+
+    }
+
+    private void log(String tag, String message) {
+        System.out.println(TAG + message);
 
     }
 
