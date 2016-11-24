@@ -67,6 +67,7 @@ dependencies {
     compile 'io.tus.java.client:tus-java-client:0.3.1'
     compile 'io.tus.android.client:tus-android-client:0.1.4'
     compile 'com.google.protobuf:protobuf-lite:3.0.0'
+    compile 'com.google.code.gson:gson:2.8.0'
     compile project(':ancome')
 }
 

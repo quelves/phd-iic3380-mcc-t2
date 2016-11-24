@@ -1,10 +1,13 @@
 package jwtc.chess.algorithm;
 
+import android.util.Log;
+
 import jwtc.chess.GameControl;
 import jwtc.chess.JNI;
 import jwtc.chess.Move;
 
 public class SearchAlgorithmRunner implements Runnable{
+	private static final String TAG = "SearchAlgorithmRunner";
 	protected GameControl m_control;
 	public SearchAlgorithmRunner(GameControl gc){
 		m_control = gc;
@@ -35,7 +38,7 @@ public class SearchAlgorithmRunner implements Runnable{
 				else {
 					s = "Searched at " + level + " ply";
 				}
-				System.out.println("s1 = " + s);
+				Log.i(TAG, "s1 = " + s);
 				m_control.sendMessageFromThread(s);
 				
 			} else {
@@ -75,7 +78,7 @@ public class SearchAlgorithmRunner implements Runnable{
 					}
 					
 					s = s + "\n\t" + String.format("%.2f", fValue) /*+ "\t@ " + ply*/;
-					System.out.println("s2 = " + s);
+					Log.i(TAG, "s2 = " + s);
 					m_control.sendMessageFromThread(s);
 				}
 				
@@ -89,13 +92,13 @@ public class SearchAlgorithmRunner implements Runnable{
 				
 				if(evalCnt == 0){
 					s = "From opening book";
-					System.out.println("s3 = " + s);
+					Log.i(TAG, "s3 = " + s);
 				} else {
 					//s = "";
 					int iTime = (int)((System.currentTimeMillis()-lMillies)/1000); 
 					iNps = (int)(evalCnt / iTime);
 					s = iNps + " N/s (" + iTime + " s)" + "\n\t" + String.format("%.2f", fValue);
-					System.out.println("s4 = " + s);
+					Log.i(TAG	, "s4 = " + s);
 				}
 				m_control.sendMessageFromThread(s);
 				
