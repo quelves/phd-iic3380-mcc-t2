@@ -219,16 +219,21 @@ public class MainActivity extends Activity {
         } else {
             if (mVideoFileIn != null) {
                 final long startTime = SystemClock.elapsedRealtime();
-                final File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), getTranscodedVideoOutputFileName());
+                final File outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
                 File moviesDirectory = outputFile.getParentFile();
                 if (!moviesDirectory.exists()) {
                     moviesDirectory.mkdir();
                 }
 
+                log(TAG, "Work dir: " + MainApplication.getMainApplicationContext().getFilesDir().getAbsolutePath());
+                log(TAG, "fileoutput: " + outputFile.getPath());
+
 
                 String[] command = {"-y", "-i", "", "-s", "1280x720", ""};
                 command[2] = mVideoFileIn.getAbsolutePath();
                 command[5] = outputFile.getAbsolutePath();
+
+
 
                 //Log.i(TAG, "Executing FFmpeg command: " + command);
                 try {
@@ -302,9 +307,21 @@ public class MainActivity extends Activity {
                         @Override
                         public void handleResult(Params result) {
                             try {
-                                tvResult.setText("Callback of transcode!");
-                                File file = VideoTranscodingRunnable.createOutputFile(result.openFile(MainActivity.this, VideoTranscodingRunnable.KEY_VIDEO), getTranscodedVideoOutputFileName());
-                                onTranscodeFinished(Boolean.valueOf(result.getString(VideoTranscodingRunnable.KEY_RESULT)));
+                                log(TAG, "Callback of runner!");
+                                if (result != null) {
+                                    boolean resultProcess = Boolean.valueOf(result.getString(VideoTranscodingRunnable.KEY_RESULT));
+                                    if (resultProcess) {
+                                        File file = VideoTranscodingRunnable.createOutputFile(result.openFile(MainActivity.this, VideoTranscodingRunnable.KEY_VIDEO), getTranscodedVideoOutputFileName());
+                                    }
+                                    onTranscodeFinished(resultProcess);
+                                }
+                                else {
+                                    log(TAG, "Error en processamiento");
+                                    onTranscodeFinished(false);
+                                }
+                                if (mProgressDialog != null) {
+                                    mProgressDialog.dismiss();
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 onTranscodeFinished(false);
@@ -313,7 +330,7 @@ public class MainActivity extends Activity {
                     });
                     CloudManager.executeCloudOperation(this, operation);
                     mProgressDialog = ProgressDialog.show(this, "Please wait", "Transcoding in progress...", true);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     if (mProgressDialog != null) {
                         mProgressDialog.dismiss();

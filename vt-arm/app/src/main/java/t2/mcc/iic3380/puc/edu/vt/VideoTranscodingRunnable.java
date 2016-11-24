@@ -95,14 +95,18 @@ public class VideoTranscodingRunnable extends CloudRunnable {
 
             while (!finalized) {
                 System.out.println("waiting....");
-                Thread.sleep(100);
+                Thread.sleep(1000);
 
             }
 
             Params result = new Params();
-            result.putFile(KEY_VIDEO, outputFile);
+            if (outputFile != null) {
+                result.putFile(KEY_VIDEO, outputFile);
+            }
+            else {
+                resultProcess = false;
+            }
             result.putString(KEY_RESULT, String.valueOf(resultProcess));
-
 
             return result;
         } catch (Exception e) {
@@ -124,12 +128,13 @@ public class VideoTranscodingRunnable extends CloudRunnable {
     private void transcode() {
         if (mVideoFileIn != null) {
             final long startTime = SystemClock.elapsedRealtime();
-            final File outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
+            outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
             File moviesDirectory = outputFile.getParentFile();
             if (!moviesDirectory.exists()) {
                 moviesDirectory.mkdir();
             }
-
+            log(TAG, "Work dir: " + MainApplication.getMainApplicationContext().getFilesDir().getAbsolutePath());
+            log(TAG, "fileoutput: " + outputFile.getPath());
 
             String[] command = {"-y", "-i", "", "-s", "1280x720", ""};
             command[2] = mVideoFileIn.getAbsolutePath();
@@ -149,12 +154,14 @@ public class VideoTranscodingRunnable extends CloudRunnable {
                     public void onFinish() {
                         long time = SystemClock.elapsedRealtime() - startTime;
                         log(TAG, "Transcoding finished. Operation took " + time + " ms.");
+                        finalized = true;
 
                     }
 
                     @Override
                     public void onSuccess(String message) {
                         log(TAG, "Transcoding success: " + message);
+                        onTranscodeFinished(true);
 
                     }
 
@@ -166,11 +173,14 @@ public class VideoTranscodingRunnable extends CloudRunnable {
                     @Override
                     public void onFailure(String message) {
                         log(TAG, "Transcoding failure: " + message);
+                        onTranscodeFinished(false);
 
                     }
                 });
             } catch (FFmpegCommandAlreadyRunningException e) {
                 e.printStackTrace();
+                resultProcess = false;
+                finalized = true;
             }
 
 
