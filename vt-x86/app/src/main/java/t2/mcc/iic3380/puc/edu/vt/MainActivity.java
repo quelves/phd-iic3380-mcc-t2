@@ -26,6 +26,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
+import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.FFmpegLoadBinaryResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
 import com.google.firebase.storage.FileDownloadTask;
 
 import net.ypresto.androidtranscoder.MediaTranscoder;
@@ -40,6 +45,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import edu.puc.astral.CloudManager;
 import edu.puc.astral.CloudOperation;
@@ -47,6 +53,7 @@ import edu.puc.astral.CloudResultReceiver;
 import edu.puc.astral.Params;
 
 import static android.R.id.input;
+import static android.R.id.message;
 
 public class MainActivity extends Activity {
     private static final String TAG = "TranscoderActivity";
@@ -87,6 +94,12 @@ public class MainActivity extends Activity {
                 selectVideo();
             }
         });
+        findViewById(R.id.btn_transcode_local_local).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transcode();
+            }
+        });
         findViewById(R.id.btn_transcode_local).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +112,13 @@ public class MainActivity extends Activity {
                 transcode(CloudOperation.CONTEXT_CLOUD);
             }
         });
+        findViewById(R.id.btn_default_video).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadDefaultVideo();
+            }
+        });
+
     }
 
     @Override
@@ -113,6 +133,135 @@ public class MainActivity extends Activity {
         CloudManager.unregisterReceiver(this, mReceiver);
     }
 
+    private void loadDefaultVideo() {
+        try {
+            InputStream is = getAssets().open("video.webm");
+            File video = copyVideoToTempFile(is);
+            is.close();
+
+            if (video != null) {
+                MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+                retriever.setDataSource(video.getAbsolutePath());
+
+                Bitmap firstFrame = retriever.getFrameAtTime(3000000, MediaMetadataRetriever.OPTION_CLOSEST);
+                retriever.release();
+
+                mVideoFrameHolder.setImageBitmap(firstFrame);
+
+                Log.i(TAG, "Default video loaded");
+            } else {
+                Log.i(TAG, "Failed to load default video");
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private File copyVideoToTempFile(InputStream is) {
+        File tempFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), "temp.webm");
+        try {
+            FileOutputStream fos = new FileOutputStream(tempFile);
+            byte[] buffer = new byte[1024];
+            int length;
+            while((length = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, length);
+            }
+            fos.close();
+
+            mVideoFileIn = tempFile;
+            return tempFile;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * Transcodes a video into a .mp4 video file with 720p resolution.
+     *
+     */
+    private void transcode() {
+        if (ContextCompat.checkSelfPermission(
+                this, permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_WRITE_PERMISSION);
+        } else {
+            if (mVideoFileIn != null) {
+                final long startTime = SystemClock.elapsedRealtime();
+                final File outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
+                File moviesDirectory = outputFile.getParentFile();
+                if (!moviesDirectory.exists()) {
+                    moviesDirectory.mkdir();
+                }
+
+                log(TAG, "Work dir: " + MainApplication.getMainApplicationContext().getFilesDir().getAbsolutePath());
+                log(TAG, "fileoutput: " + outputFile.getPath());
+
+
+                String[] command = {"-y", "-i", "", "-s", "1280x720", ""};
+                command[2] = mVideoFileIn.getAbsolutePath();
+                command[5] = outputFile.getAbsolutePath();
+
+
+
+                //Log.i(TAG, "Executing FFmpeg command: " + command);
+                try {
+                    FFmpeg.getInstance(MainActivity.this).execute(command, new FFmpegExecuteResponseHandler() {
+
+                        @Override
+                        public void onStart() {
+                            log(TAG, "Transcoding started");
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            long time = SystemClock.elapsedRealtime() - startTime;
+                            log(TAG, "Transcoding finished. Operation took " + time + " ms.");
+
+                        }
+
+                        @Override
+                        public void onSuccess(String message) {
+                            log(TAG, "Transcoding success: " + message);
+                            mProgressDialog.dismiss();
+                        }
+
+                        @Override
+                        public void onProgress(String message) {
+                            log(TAG, "Transcoding progress: " + message);
+                        }
+
+                        @Override
+                        public void onFailure(String message) {
+                            log(TAG, "Transcoding failure: " + message);
+                            mProgressDialog.dismiss();
+                        }
+                    });
+                } catch (FFmpegCommandAlreadyRunningException e) {
+                    e.printStackTrace();
+                }
+
+                mProgressDialog = ProgressDialog.show(this, "Please wait", "Transcoding in progress...", true);
+
+
+            } else {
+                Toast.makeText(this, "No video file selected.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    /**
+     * Transcodes a video into a .mp4 video file with 720p resolution.
+     *
+     */
     private void transcode(@CloudOperation.ExecutionContext int executionContext) {
         if (ContextCompat.checkSelfPermission(
                 this, permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -134,9 +283,21 @@ public class MainActivity extends Activity {
                         @Override
                         public void handleResult(Params result) {
                             try {
-                                tvResult.setText("Callback of transcode!");
-                                File file = VideoTranscodingRunnable.createOutputFile(result.openFile(MainActivity.this, VideoTranscodingRunnable.KEY_VIDEO), getTranscodedVideoOutputFileName());
-                                onTranscodeFinished(Boolean.valueOf(result.getString(VideoTranscodingRunnable.KEY_RESULT)));
+                                log(TAG, "Callback of runner!");
+                                if (result != null) {
+                                    boolean resultProcess = Boolean.valueOf(result.getString(VideoTranscodingRunnable.KEY_RESULT));
+                                    if (resultProcess) {
+                                        File file = VideoTranscodingRunnable.createOutputFile(result.openFile(MainActivity.this, VideoTranscodingRunnable.KEY_VIDEO), getTranscodedVideoOutputFileName());
+                                    }
+                                    onTranscodeFinished(resultProcess);
+                                }
+                                else {
+                                    log(TAG, "Error en processamiento");
+                                    onTranscodeFinished(false);
+                                }
+                                if (mProgressDialog != null) {
+                                    mProgressDialog.dismiss();
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 onTranscodeFinished(false);
@@ -145,7 +306,7 @@ public class MainActivity extends Activity {
                     });
                     CloudManager.executeCloudOperation(this, operation);
                     mProgressDialog = ProgressDialog.show(this, "Please wait", "Transcoding in progress...", true);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     if (mProgressDialog != null) {
                         mProgressDialog.dismiss();
@@ -165,8 +326,16 @@ public class MainActivity extends Activity {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        mResultHandlers.get(operationId).handleResult(result);
-                        mResultHandlers.remove(operationId);
+                        try {
+                            log(TAG, "callback to CloudResultReceiver");
+                            mResultHandlers.get(operationId).handleResult(result);
+                            mResultHandlers.remove(operationId);
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                            onTranscodeFinished(false);
+                        }
+
                     }
                 });
 
@@ -316,17 +485,9 @@ public class MainActivity extends Activity {
     }
 
 
-
-
-
-
-
     private interface ResultHandler {
         void handleResult(Params result);
     }
-
-
-
 
     private void onTranscodeFinished(boolean success) {
         if (mProgressDialog != null) {
@@ -398,73 +559,13 @@ public class MainActivity extends Activity {
         sendBroadcast(scanIntent);
     }
 
-    /**
-     * Transcodes a video into a .mp4 video file with 720p resolution.
-     *
-     */
-    private void transcode() {
-        if (ContextCompat.checkSelfPermission(
-                this, permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this,
-                    new String[]{permission.WRITE_EXTERNAL_STORAGE},
-                    REQUEST_CODE_WRITE_PERMISSION);
-        } else {
-            if (mVideoFileDescriptor != null) {
-                final long startTime = SystemClock.uptimeMillis();
-                final MediaTranscoder.Listener listener = new MediaTranscoder.Listener() {
-                    @Override
-                    public void onTranscodeProgress(double progress) {
-                        Log.i(TAG, "Progress: " + progress);
-                        tvResult.setText("Progress: " + progress);
-                    }
+    private void log(String tag, String message) {
+        Log.i(TAG, message);
+        tvResult.setText(TAG + ":" + message);
 
-                    @Override
-                    public void onTranscodeCompleted() {
-                        Log.d(TAG, "transcoding took " + (SystemClock.uptimeMillis() - startTime) + "ms");
-                        tvResult.setText("transcoding took " + (SystemClock.uptimeMillis() - startTime) + "ms");
-                        onTranscodeFinished(true);
-                    }
-
-                    @Override
-                    public void onTranscodeCanceled() {
-                        tvResult.setText("trancoding canceled");
-                        onTranscodeFinished(false);
-                    }
-
-                    @Override
-                    public void onTranscodeFailed(Exception exception) {
-                        onTranscodeFinished(false);
-                    }
-                };
-
-                final File outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
-                File moviesDirectory = outputFile.getParentFile();
-                if (!moviesDirectory.exists()) {
-                    moviesDirectory.mkdir();
-                }
-                try {
-                    outputFile.createNewFile();
-                    Thread thread = new Thread() {
-                        @Override
-                        public void run() {
-                            MediaTranscoder.getInstance().transcodeVideo(mVideoFileDescriptor, outputFile.getAbsolutePath(),
-                                    MediaFormatStrategyPresets.createAndroid720pStrategy(), listener);
-                        }
-                    };
-                    thread.start();
-                    mProgressDialog = ProgressDialog.show(this, "Please wait", "Transcoding in progress...", true);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-
-                    if (mProgressDialog != null) {
-                        mProgressDialog.dismiss();
-                    }
-                }
-            } else {
-                Toast.makeText(this, "No video file selected.", Toast.LENGTH_LONG).show();
-            }
-        }
     }
+
+
+
 }

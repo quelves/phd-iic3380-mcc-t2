@@ -68,6 +68,7 @@ dependencies {
     compile 'com.google.protobuf:protobuf-lite:3.0.0'
 
     compile 'net.ypresto.androidtranscoder:android-transcoder:0.2.0'
+    compile 'com.writingminds:FFmpegAndroid:0.3.2'
 
     testCompile 'junit:junit:4.12'
 }
