@@ -10,20 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="71467a9c-ef41-4360-bc54-8e50b7db9e23" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-x86/app/src/main/assets/video.mp4" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-x86/app/src/main/assets/video.webm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../vt-x86/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-x86/.idea/misc.xml" afterPath="$PROJECT_DIR$/../vt-x86/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-x86/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../vt-x86/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-x86/app/build.gradle" afterPath="$PROJECT_DIR$/../vt-x86/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-x86/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainActivity.java" afterPath="$PROJECT_DIR$/../vt-x86/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-x86/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainApplication.java" afterPath="$PROJECT_DIR$/../vt-x86/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-x86/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java" afterPath="$PROJECT_DIR$/../vt-x86/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/VideoTranscodingRunnable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-x86/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/../vt-x86/app/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-x86/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/../vt-x86/app/src/main/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-x86/local.properties" afterPath="$PROJECT_DIR$/../vt-x86/local.properties" />
     </list>
     <ignored path="vt-arm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -3183,7 +3171,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1114" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
