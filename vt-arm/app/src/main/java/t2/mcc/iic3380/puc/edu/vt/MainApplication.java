@@ -2,7 +2,10 @@ package t2.mcc.iic3380.puc.edu.vt;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.os.Environment;
 import android.support.multidex.MultiDexApplication;
+
+import java.io.File;
 
 import edu.puc.astral.CloudManager;
 
@@ -13,11 +16,14 @@ public class MainApplication extends MultiDexApplication {
     private static String HOST_IP = "http://35.163.228.128";
     private static String SENDER_ID = "413368182491";
 
+    public static final File WORK_DIR = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+
     private static MainApplication instance;
 
     public MainApplication() {
         super();
         instance = this;
+
 
     }
 

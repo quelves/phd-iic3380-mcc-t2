@@ -10,7 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4c2ed5d-5529-41ce-82f6-edde6ab7e6a3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-arm/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../vt-arm/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vt-x86.iws" />
@@ -3194,7 +3193,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480005408292</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="vt-x86 adapt to fix video trascode">
+      <created>1480005615938</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1480005615938</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">

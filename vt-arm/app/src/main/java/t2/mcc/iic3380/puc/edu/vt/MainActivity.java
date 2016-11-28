@@ -53,6 +53,7 @@ import edu.puc.astral.Params;
 
 import static android.R.id.input;
 import static android.R.id.message;
+import static t2.mcc.iic3380.puc.edu.vt.MainApplication.WORK_DIR;
 
 public class MainActivity extends Activity {
     private static final String TAG = "TranscoderActivity";
@@ -184,7 +185,7 @@ public class MainActivity extends Activity {
     }
 
     private File copyVideoToTempFile(InputStream is) {
-        File tempFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), "temp.webm");
+        File tempFile = new File(WORK_DIR, "temp.webm");
         try {
             FileOutputStream fos = new FileOutputStream(tempFile);
             byte[] buffer = new byte[1024];
@@ -219,13 +220,13 @@ public class MainActivity extends Activity {
         } else {
             if (mVideoFileIn != null) {
                 final long startTime = SystemClock.elapsedRealtime();
-                final File outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
+                final File outputFile = new File(WORK_DIR, getTranscodedVideoOutputFileName());
                 File moviesDirectory = outputFile.getParentFile();
                 if (!moviesDirectory.exists()) {
                     moviesDirectory.mkdir();
                 }
 
-                log(TAG, "Work dir: " + MainApplication.getMainApplicationContext().getFilesDir().getAbsolutePath());
+                log(TAG, "Work dir: " + WORK_DIR.getAbsolutePath());
                 log(TAG, "fileoutput: " + outputFile.getPath());
 
 
@@ -437,7 +438,7 @@ public class MainActivity extends Activity {
 
 
     private void createOutputFile(InputStream in) {
-        final File file = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
+        final File file = new File(WORK_DIR, getTranscodedVideoOutputFileName());
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
@@ -469,7 +470,7 @@ public class MainActivity extends Activity {
     }
 
     private File uriToFile(Uri uri) {
-        final File file = new File(MainApplication.getMainApplicationContext().getFilesDir(), getPreTranscodedVideoOutputFileName());
+        final File file = new File(WORK_DIR, getPreTranscodedVideoOutputFileName());
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
@@ -524,7 +525,7 @@ public class MainActivity extends Activity {
         String extension = ".mp4";
         int counter = 1;
 
-        File moviesDirectory = MainApplication.getMainApplicationContext().getFilesDir();
+        File moviesDirectory = WORK_DIR;
         File[] files = moviesDirectory.listFiles();
         if (files == null || !isNameContained(title + extension, files)) {
             return title + extension;
@@ -544,7 +545,7 @@ public class MainActivity extends Activity {
         String extension = ".mp4";
         int counter = 1;
 
-        File moviesDirectory = MainApplication.getMainApplicationContext().getFilesDir();
+        File moviesDirectory = WORK_DIR;
         File[] files = moviesDirectory.listFiles();
         if (files == null || !isNameContained(title + extension, files)) {
             return title + extension;

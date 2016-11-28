@@ -128,12 +128,12 @@ public class VideoTranscodingRunnable extends CloudRunnable {
     private void transcode() {
         if (mVideoFileIn != null) {
             final long startTime = SystemClock.elapsedRealtime();
-            outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
+            outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), getTranscodedVideoOutputFileName());
             File moviesDirectory = outputFile.getParentFile();
             if (!moviesDirectory.exists()) {
                 moviesDirectory.mkdir();
             }
-            log(TAG, "Work dir: " + MainApplication.getMainApplicationContext().getFilesDir().getAbsolutePath());
+            log(TAG, "Work dir: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath());
             log(TAG, "fileoutput: " + outputFile.getPath());
 
             String[] command = {"-y", "-i", "", "-s", "1280x720", ""};
@@ -208,7 +208,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
         String extension = ".mp4";
         int counter = 1;
 
-        File moviesDirectory = MainApplication.getMainApplicationContext().getFilesDir();
+        File moviesDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
         File[] files = moviesDirectory.listFiles();
         if (files == null || !isNameContained(title + extension, files)) {
             return title + extension;
@@ -231,7 +231,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
     }
 
     public static File createOutputFile(InputStream in, String filenane) {
-        final File file = new File(MainApplication.getMainApplicationContext().getFilesDir(), filenane);
+        final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), filenane);
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
@@ -267,7 +267,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
 
     public FileDescriptor createFileAndGetFD(InputStream in, String filenane) {
         FileDescriptor result = null;
-        final File file = new File(MainApplication.getMainApplicationContext().getFilesDir(), filenane);
+        final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), filenane);
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
