@@ -42,6 +42,9 @@ import java.net.URI;
 import edu.puc.astral.CloudRunnable;
 import edu.puc.astral.Params;
 
+import static java.security.AccessController.getContext;
+
+
 /**
  * Created by jose on 11/25/15.
  */
@@ -70,10 +73,13 @@ public class VideoTranscodingRunnable extends CloudRunnable {
 
     private boolean finalized = false;
 
+    private static final File  EMU_DIR = MainApplication.getMainApplicationContext().getFilesDir();
+
     @Override
     public Params execute(Params params, Params lastState) {
         FileOutputStream fos = null;
         try {
+            log(TAG, "Llegue!!!");
             InputStream is = params.openFile(getContext(), KEY_VIDEO);
 
             mVideoFileIn = createOutputFile(is, FILE_NAME);
@@ -128,12 +134,12 @@ public class VideoTranscodingRunnable extends CloudRunnable {
     private void transcode() {
         if (mVideoFileIn != null) {
             final long startTime = SystemClock.elapsedRealtime();
-            outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), getTranscodedVideoOutputFileName());
+            outputFile = new File(EMU_DIR, getTranscodedVideoOutputFileName());
             File moviesDirectory = outputFile.getParentFile();
             if (!moviesDirectory.exists()) {
                 moviesDirectory.mkdir();
             }
-            log(TAG, "Work dir: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath());
+            log(TAG, "Work dir: " + EMU_DIR.getAbsolutePath());
             log(TAG, "fileoutput: " + outputFile.getPath());
 
             String[] command = {"-y", "-i", "", "-s", "1280x720", ""};
@@ -208,7 +214,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
         String extension = ".mp4";
         int counter = 1;
 
-        File moviesDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+        File moviesDirectory = EMU_DIR;
         File[] files = moviesDirectory.listFiles();
         if (files == null || !isNameContained(title + extension, files)) {
             return title + extension;
@@ -231,7 +237,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
     }
 
     public static File createOutputFile(InputStream in, String filenane) {
-        final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), filenane);
+        final File file = new File(EMU_DIR, filenane);
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
@@ -256,6 +262,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
 
         } finally {
         }
@@ -267,7 +274,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
 
     public FileDescriptor createFileAndGetFD(InputStream in, String filenane) {
         FileDescriptor result = null;
-        final File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), filenane);
+        final File file = new File(EMU_DIR, filenane);
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
@@ -292,7 +299,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
             }
             result = output.getFD();
         } catch (Exception e) {
-
+            e.printStackTrace();
         } finally {
         }
 

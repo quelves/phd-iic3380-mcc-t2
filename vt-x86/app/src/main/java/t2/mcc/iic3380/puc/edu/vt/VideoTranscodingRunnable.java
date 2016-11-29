@@ -25,9 +25,7 @@ import android.widget.Toast;
 
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
-import com.github.hiteshsondhi88.libffmpeg.FFmpegLoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
-import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
 
 import net.ypresto.androidtranscoder.MediaTranscoder;
 import net.ypresto.androidtranscoder.format.MediaFormatStrategyPresets;
@@ -43,6 +41,9 @@ import java.net.URI;
 
 import edu.puc.astral.CloudRunnable;
 import edu.puc.astral.Params;
+
+import static java.security.AccessController.getContext;
+
 
 /**
  * Created by jose on 11/25/15.
@@ -62,6 +63,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
 
     private static final int REQUEST_CODE_SELECT_VIDEO = 3;
 
+    private FileDescriptor mVideoFileDescriptor;
     private File mVideoFileIn;
     private ImageView mVideoFrameHolder;
 
@@ -71,22 +73,40 @@ public class VideoTranscodingRunnable extends CloudRunnable {
 
     private boolean finalized = false;
 
+    private static final File  EMU_DIR = MainApplication.getMainApplicationContext().getFilesDir();
+
     @Override
     public Params execute(Params params, Params lastState) {
         FileOutputStream fos = null;
         try {
+            log(TAG, "Llegue!!!");
             InputStream is = params.openFile(getContext(), KEY_VIDEO);
-            mVideoFileIn = copyVideoToTempFile(is);
+
+            mVideoFileIn = createOutputFile(is, FILE_NAME);
+
+
+            System.out.println("File name : " + mVideoFileIn.getAbsolutePath());
+            ContentResolver resolver = MainApplication.getMainApplicationContentResolver();
+            ParcelFileDescriptor parcelFileDescriptor = null;
+            try {
+                parcelFileDescriptor = resolver.openFileDescriptor(Uri.fromFile(mVideoFileIn), "r");
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            mVideoFileDescriptor = parcelFileDescriptor.getFileDescriptor();
+
 
             transcode();
+
             while (!finalized) {
                 System.out.println("waiting....");
                 Thread.sleep(1000);
+
             }
 
             Params result = new Params();
             if (outputFile != null) {
-                log(TAG, "OutputFile name : " + outputFile.getAbsolutePath());
                 result.putFile(KEY_VIDEO, outputFile);
             }
             else {
@@ -112,15 +132,14 @@ public class VideoTranscodingRunnable extends CloudRunnable {
      * Transcodes a video into a .mp4 video file with 720p resolution.
      */
     private void transcode() {
-
         if (mVideoFileIn != null) {
             final long startTime = SystemClock.elapsedRealtime();
-            outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
+            outputFile = new File(EMU_DIR, getTranscodedVideoOutputFileName());
             File moviesDirectory = outputFile.getParentFile();
             if (!moviesDirectory.exists()) {
                 moviesDirectory.mkdir();
             }
-            log(TAG, "Work dir: " + MainApplication.getMainApplicationContext().getFilesDir().getAbsolutePath());
+            log(TAG, "Work dir: " + EMU_DIR.getAbsolutePath());
             log(TAG, "fileoutput: " + outputFile.getPath());
 
             String[] command = {"-y", "-i", "", "-s", "1280x720", ""};
@@ -184,9 +203,9 @@ public class VideoTranscodingRunnable extends CloudRunnable {
         finalized = true;
 
         if (success) {
-            log(TAG, "Successfully transcoded video file.");
+            System.out.println(TAG + "Successfully transcoded video file.");
         } else {
-            log(TAG, "Failed to transcode video file.");
+            System.out.println(TAG + "Failed to transcode video file.");
         }
     }
 
@@ -195,7 +214,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
         String extension = ".mp4";
         int counter = 1;
 
-        File moviesDirectory = MainApplication.getMainApplicationContext().getFilesDir();
+        File moviesDirectory = EMU_DIR;
         File[] files = moviesDirectory.listFiles();
         if (files == null || !isNameContained(title + extension, files)) {
             return title + extension;
@@ -218,7 +237,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
     }
 
     public static File createOutputFile(InputStream in, String filenane) {
-        final File file = new File(MainApplication.getMainApplicationContext().getFilesDir(), filenane);
+        final File file = new File(EMU_DIR, filenane);
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
@@ -243,6 +262,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
 
         } finally {
         }
@@ -254,7 +274,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
 
     public FileDescriptor createFileAndGetFD(InputStream in, String filenane) {
         FileDescriptor result = null;
-        final File file = new File(MainApplication.getMainApplicationContext().getFilesDir(), filenane);
+        final File file = new File(EMU_DIR, filenane);
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
@@ -279,7 +299,7 @@ public class VideoTranscodingRunnable extends CloudRunnable {
             }
             result = output.getFD();
         } catch (Exception e) {
-
+            e.printStackTrace();
         } finally {
         }
 
@@ -291,27 +311,6 @@ public class VideoTranscodingRunnable extends CloudRunnable {
     private void log(String tag, String message) {
         System.out.println(TAG + message);
 
-    }
-
-    private File copyVideoToTempFile(InputStream is) {
-        File tempFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), "temp_run.webm");
-        try {
-            FileOutputStream fos = new FileOutputStream(tempFile);
-            byte[] buffer = new byte[1024];
-            int length;
-            while((length = is.read(buffer)) != -1) {
-                fos.write(buffer, 0, length);
-            }
-            fos.close();
-
-            mVideoFileIn = tempFile;
-            return tempFile;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 

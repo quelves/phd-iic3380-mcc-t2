@@ -158,6 +158,22 @@ public class MainActivity extends Activity {
         CloudManager.unregisterReceiver(this, mReceiver);
     }
 
+    private CloudResultReceiver mReceiver = new CloudResultReceiver() {
+        @Override
+        public void onReceiveResult(final String operationId, final Params result) {
+            if (mResultHandlers.containsKey(operationId)) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mResultHandlers.get(operationId).handleResult(result);
+                        mResultHandlers.remove(operationId);
+                    }
+                });
+
+            }
+        }
+    };
+
     private void loadDefaultVideo() {
         try {
             InputStream is = getAssets().open("video.webm");
@@ -344,21 +360,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    private CloudResultReceiver mReceiver = new CloudResultReceiver() {
-        @Override
-        public void onReceiveResult(final String operationId, final Params result) {
-            if (mResultHandlers.containsKey(operationId)) {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mResultHandlers.get(operationId).handleResult(result);
-                        mResultHandlers.remove(operationId);
-                    }
-                });
 
-            }
-        }
-    };
 
     private void selectVideo() {
         if (ContextCompat.checkSelfPermission(

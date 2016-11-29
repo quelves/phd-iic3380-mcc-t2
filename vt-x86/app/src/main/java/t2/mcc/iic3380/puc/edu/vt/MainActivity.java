@@ -45,7 +45,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 import edu.puc.astral.CloudManager;
 import edu.puc.astral.CloudOperation;
@@ -54,6 +53,7 @@ import edu.puc.astral.Params;
 
 import static android.R.id.input;
 import static android.R.id.message;
+import static t2.mcc.iic3380.puc.edu.vt.MainApplication.WORK_DIR;
 
 public class MainActivity extends Activity {
     private static final String TAG = "TranscoderActivity";
@@ -119,6 +119,31 @@ public class MainActivity extends Activity {
             }
         });
 
+        try {
+            FFmpeg.getInstance(this).loadBinary(new FFmpegLoadBinaryResponseHandler() {
+                @Override
+                public void onFailure() {
+                    Log.i(TAG, "Failed to load FFmpeg");
+                }
+
+                @Override
+                public void onSuccess() {
+                    Log.i(TAG, "Successfully loaded FFmpeg");
+                }
+
+                @Override
+                public void onStart() {
+                    Log.i(TAG, "FFmpeg started");
+                }
+
+                @Override
+                public void onFinish() {
+                    Log.i(TAG, "FFmpeg finished");
+                }
+            });
+        } catch (FFmpegNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -132,6 +157,22 @@ public class MainActivity extends Activity {
         super.onStop();
         CloudManager.unregisterReceiver(this, mReceiver);
     }
+
+    private CloudResultReceiver mReceiver = new CloudResultReceiver() {
+        @Override
+        public void onReceiveResult(final String operationId, final Params result) {
+            if (mResultHandlers.containsKey(operationId)) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mResultHandlers.get(operationId).handleResult(result);
+                        mResultHandlers.remove(operationId);
+                    }
+                });
+
+            }
+        }
+    };
 
     private void loadDefaultVideo() {
         try {
@@ -160,7 +201,7 @@ public class MainActivity extends Activity {
     }
 
     private File copyVideoToTempFile(InputStream is) {
-        File tempFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), "temp.webm");
+        File tempFile = new File(WORK_DIR, "temp.webm");
         try {
             FileOutputStream fos = new FileOutputStream(tempFile);
             byte[] buffer = new byte[1024];
@@ -195,13 +236,13 @@ public class MainActivity extends Activity {
         } else {
             if (mVideoFileIn != null) {
                 final long startTime = SystemClock.elapsedRealtime();
-                final File outputFile = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
+                final File outputFile = new File(WORK_DIR, getTranscodedVideoOutputFileName());
                 File moviesDirectory = outputFile.getParentFile();
                 if (!moviesDirectory.exists()) {
                     moviesDirectory.mkdir();
                 }
 
-                log(TAG, "Work dir: " + MainApplication.getMainApplicationContext().getFilesDir().getAbsolutePath());
+                log(TAG, "Work dir: " + WORK_DIR.getAbsolutePath());
                 log(TAG, "fileoutput: " + outputFile.getPath());
 
 
@@ -319,29 +360,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    private CloudResultReceiver mReceiver = new CloudResultReceiver() {
-        @Override
-        public void onReceiveResult(final String operationId, final Params result) {
-            if (mResultHandlers.containsKey(operationId)) {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            log(TAG, "callback to CloudResultReceiver");
-                            mResultHandlers.get(operationId).handleResult(result);
-                            mResultHandlers.remove(operationId);
-                        }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                            onTranscodeFinished(false);
-                        }
 
-                    }
-                });
-
-            }
-        }
-    };
 
     private void selectVideo() {
         if (ContextCompat.checkSelfPermission(
@@ -421,7 +440,7 @@ public class MainActivity extends Activity {
 
 
     private void createOutputFile(InputStream in) {
-        final File file = new File(MainApplication.getMainApplicationContext().getFilesDir(), getTranscodedVideoOutputFileName());
+        final File file = new File(WORK_DIR, getTranscodedVideoOutputFileName());
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
@@ -453,7 +472,7 @@ public class MainActivity extends Activity {
     }
 
     private File uriToFile(Uri uri) {
-        final File file = new File(MainApplication.getMainApplicationContext().getFilesDir(), getPreTranscodedVideoOutputFileName());
+        final File file = new File(WORK_DIR, getPreTranscodedVideoOutputFileName());
         File moviesDirectory = file.getParentFile();
         if (!moviesDirectory.exists()) {
             moviesDirectory.mkdir();
@@ -508,7 +527,7 @@ public class MainActivity extends Activity {
         String extension = ".mp4";
         int counter = 1;
 
-        File moviesDirectory = MainApplication.getMainApplicationContext().getFilesDir();
+        File moviesDirectory = WORK_DIR;
         File[] files = moviesDirectory.listFiles();
         if (files == null || !isNameContained(title + extension, files)) {
             return title + extension;
@@ -528,7 +547,7 @@ public class MainActivity extends Activity {
         String extension = ".mp4";
         int counter = 1;
 
-        File moviesDirectory = MainApplication.getMainApplicationContext().getFilesDir();
+        File moviesDirectory = WORK_DIR;
         File[] files = moviesDirectory.listFiles();
         if (files == null || !isNameContained(title + extension, files)) {
             return title + extension;

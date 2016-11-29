@@ -18,11 +18,14 @@ public class MainApplication extends MultiDexApplication {
 
     public static final File WORK_DIR = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
 
+
     private static MainApplication instance;
 
     public MainApplication() {
         super();
         instance = this;
+
+
 
 
     }

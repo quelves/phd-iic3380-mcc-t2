@@ -2,11 +2,14 @@ package t2.mcc.iic3380.puc.edu.vt;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.os.Environment;
 import android.support.multidex.MultiDexApplication;
 
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.FFmpegLoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
+
+import java.io.File;
 
 import edu.puc.astral.CloudManager;
 
@@ -18,6 +21,8 @@ public class MainApplication extends MultiDexApplication {
     private static String SENDER_ID = "948048471281";
 
     private static final String TAG = "MainApplication";
+
+    public static final File WORK_DIR = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
 
     private static MainApplication instance;
 
