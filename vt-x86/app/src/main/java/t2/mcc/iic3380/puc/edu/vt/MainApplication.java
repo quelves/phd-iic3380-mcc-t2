@@ -17,7 +17,7 @@ import edu.puc.astral.CloudManager;
  * Created by jose on 11/17/15.
  */
 public class MainApplication extends MultiDexApplication {
-    private static String HOST_IP = "http://35.163.222.118";
+    private static String HOST_IP = "http://146.155.13.177";
     private static String SENDER_ID = "948048471281";
 
     private static final String TAG = "MainApplication";
