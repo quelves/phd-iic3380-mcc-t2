@@ -10,18 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="71467a9c-ef41-4360-bc54-8e50b7db9e23" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ac-arm/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ac-arm/app/src/main/java/jwtc/chess/algorithm/SearchAlgorithmRunnerCloud.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../ac-arm/app/src/main/java/edu/puc/iic3380/mcc/t2/OffloadingCodeRunnable.java" afterPath="$PROJECT_DIR$/../ac-arm/app/src/main/java/edu/puc/iic3380/mcc/t2/OffloadingCodeChessRunnable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ac-arm/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../ac-arm/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ac-arm/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../ac-arm/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ac-arm/app/src/main/java/jwtc/android/chess/tools/importactivity.java" afterPath="$PROJECT_DIR$/../ac-arm/app/src/main/java/jwtc/android/chess/tools/importactivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ac-arm/app/src/main/java/jwtc/chess/algorithm/SearchAlgorithmRunner.java" afterPath="$PROJECT_DIR$/../ac-arm/app/src/main/java/jwtc/chess/algorithm/SearchAlgorithmRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../nqueens/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../nqueens/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/t2/mcc/iic3380/puc/edu/vt/MainApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-x86/.idea/misc.xml" afterPath="$PROJECT_DIR$/../vt-x86/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vt-x86/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../vt-x86/.idea/workspace.xml" />
     </list>
     <ignored path="vt-arm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -3234,7 +3223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480377827029</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="start chess integration with ancome">
+      <created>1480691187010</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1480691187010</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3284,7 +3280,8 @@
     <MESSAGE value="vt-arm with video cloud thread control" />
     <MESSAGE value="vt-arm with video cloud thread control and directory with grants" />
     <MESSAGE value="vt-x86 upload ok, adb shell ok, transcode ok&#10;vt-arm upload ok, adb shell fail, transcode none" />
-    <option name="LAST_COMMIT_MESSAGE" value="vt-x86 upload ok, adb shell ok, transcode ok&#10;vt-arm upload ok, adb shell fail, transcode none" />
+    <MESSAGE value="start chess integration with ancome" />
+    <option name="LAST_COMMIT_MESSAGE" value="start chess integration with ancome" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
