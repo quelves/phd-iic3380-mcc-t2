@@ -78,8 +78,8 @@ public class VideoTranscodingRunnable extends CloudRunnable {
     @Override
     public Params execute(Params params, Params lastState) {
         FileOutputStream fos = null;
-        try {
-            log(TAG, "Llegue!!!");
+        try {            log(TAG, "Llegue!!!");
+
             InputStream is = params.openFile(getContext(), KEY_VIDEO);
 
             mVideoFileIn = createOutputFile(is, FILE_NAME);
