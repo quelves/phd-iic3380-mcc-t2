@@ -2,17 +2,24 @@ package jwtc.chess.algorithm;
 
 import android.util.Log;
 
+import edu.puc.astral.CloudManager;
+import edu.puc.astral.CloudOperation;
+import edu.puc.astral.Params;
+import edu.puc.iic3380.mcc.t2.OffloadingCodeChessRunnable;
 import jwtc.chess.GameControl;
 import jwtc.chess.JNI;
 import jwtc.chess.Move;
 
-public class SearchAlgorithmRunner implements Runnable{
+public class SearchAlgorithmRunnerCloud implements Runnable{
 	private static final String TAG = "SearchAlgorithmRunner";
 	protected GameControl m_control;
-	public SearchAlgorithmRunner(GameControl gc){
+	public SearchAlgorithmRunnerCloud(GameControl gc){
 		m_control = gc;
 	}
     // @Override
+
+
+
     public void run() {
     	try
 		{
@@ -25,7 +32,7 @@ public class SearchAlgorithmRunner implements Runnable{
 			if(m_control.getLevelMode() == GameControl.LEVEL_PLY){
 				
 				int level = m_control.getLevelPly();
-				_jni.searchDepth(level);
+				_jni.searchDepth(level); 
 				int move = _jni.getMove();
 				m_control.sendMoveMessageFromThread(move);
 				
@@ -112,4 +119,6 @@ public class SearchAlgorithmRunner implements Runnable{
 			ex.printStackTrace(System.out);
 		}
     }
+
+
 } 

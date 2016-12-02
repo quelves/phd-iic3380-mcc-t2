@@ -1,5 +1,6 @@
 package jwtc.android.chess.tools;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,12 +9,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.puc.astral.CloudManager;
+import edu.puc.astral.CloudOperation;
+import edu.puc.astral.CloudResultReceiver;
+import edu.puc.astral.Params;
+import edu.puc.iic3380.mcc.t2.OffloadingCodeChessRunnable;
 import jwtc.android.chess.MyBaseActivity;
 import jwtc.android.chess.R;
 import jwtc.android.chess.puzzle.MyPuzzleProviderARM;
@@ -60,6 +67,11 @@ public class importactivity extends MyBaseActivity {
 	protected boolean _processing;
 	
 	private final String TAG = "importactivity";
+
+	private Handler mHandler = new Handler();
+	private File mVideoFileIn;
+
+	private Map<String, ResultHandler> mResultHandlers;
 	
     /** Called when the activity is first created. */
     @Override
@@ -85,6 +97,75 @@ public class importactivity extends MyBaseActivity {
         
         _progress.setVisibility(View.INVISIBLE);
     }
+
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		CloudManager.registerReceiver(this, mReceiver);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		CloudManager.unregisterReceiver(this, mReceiver);
+	}
+
+	private interface ResultHandler {
+		void handleResult(Params result);
+	}
+
+	private CloudResultReceiver mReceiver = new CloudResultReceiver() {
+		@Override
+		public void onReceiveResult(final String operationId, final Params result) {
+			if (mResultHandlers.containsKey(operationId)) {
+				mHandler.post(new Runnable() {
+					@Override
+					public void run() {
+						mResultHandlers.get(operationId).handleResult(result);
+						mResultHandlers.remove(operationId);
+					}
+				});
+
+			}
+		}
+	};
+
+
+	private void runTranscode (@CloudOperation.ExecutionContext int executionContext, int level) {
+		try {
+			Params params = new Params();
+			params.putInt(OffloadingCodeChessRunnable.KEY_LEVEL, level);
+
+			CloudOperation operation = new CloudOperation(this, OffloadingCodeChessRunnable.class);
+			operation.setParams(params);
+			operation.setExecutionContext(executionContext);
+			mResultHandlers.put(operation.getOperationId(), new ResultHandler() {
+				@Override
+				public void handleResult(Params result) {
+					try {
+						log(TAG, "Callback of runner!");
+						if (result != null) {
+							int move = result.getInt(OffloadingCodeChessRunnable.KEY_MOVE);
+						}
+						else {
+							log(TAG, "Error en processamiento");
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			CloudManager.executeCloudOperation(this, operation);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void log(String tag, String message) {
+		System.out.println(TAG + message);
+
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
